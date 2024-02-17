@@ -13,7 +13,7 @@ export async function GET() {
 
 export async function POST(request) {
     try{
-        connectionDB();
+        connectionDB(); 
         const data = await request.json();
         console.log(data);
 
