@@ -6,8 +6,8 @@ interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
 }
 
 const BUTTON_CLASSES = {
-   primary: 'bg-blue-500 text-white',
-   secondary: 'bg-gray-300 text-black',
+   primary: 'bg-sky-500 text-white hover:bg-sky-600 ',
+   secondary: 'bg-gray-300 text-black hover:bg-gray-400',
    danger: 'bg-red-500 text-white',
    rounded: 'rounded-full',
    none: 'rounded-sm',
@@ -18,12 +18,21 @@ const Button: FunctionComponent<ButtonProps> = ({
    border,
    children,
    className,
-   onClick,
+   ...rest
 }) => {
    const btnClasses =
-      BUTTON_CLASSES[variant] + ' ' + BUTTON_CLASSES[border] + ' ' + className;
+      'font-serif px-4 py-2 flex text-center items-center justify-center transition-colors duration-300 ease-in-out ' +
+      BUTTON_CLASSES[variant] +
+      ' ' +
+      BUTTON_CLASSES[border] +
+      ' ' +
+      className;
 
-   return <button className={btnClasses}>{children}</button>;
+   return (
+      <button {...rest} className={btnClasses}>
+         {children}
+      </button>
+   );
 };
 
 export default Button;
