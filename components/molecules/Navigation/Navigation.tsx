@@ -14,9 +14,9 @@ const Navigation: FunctionComponent<NavigationProps> = ({
   buttons, 
 }) => {
   return (
-    <div className="w-1/2 flex-col lg:flex-row flex justify-between border-white border bg-white h-1/2">
+    <div className="w-1/2 flex-col lg:flex-row flex justify-between h-48">
       {buttons.map((button) => (
-        <Link href={button.url} key={button.url} className="flex m-auto text-black lg:mx-12">
+        <Link href={button.url} key={button.url} className="flex m-auto text-black lg:mx-12 lg:p-0">
           {button.name}
         </Link>
       ))}

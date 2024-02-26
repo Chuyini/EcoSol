@@ -1,10 +1,10 @@
 "use client";
-import { FunctionComponent, HtmlHTMLAttributes } from "react";
-import { useState } from "react"; // Importa useState
+import { FunctionComponent, HtmlHTMLAttributes, useState, useEffect } from "react";
 import UserButtons, { Button } from "../../molecules/UserButtons/UserButtons";
 import Navigation, { NavButton } from "../../molecules/Navigation/Navigation";
 import Logo from "../../atoms/Logo/Logo";
 import LogoMobil from "../../atoms/LogoMobil/LogoMobil";
+import HamburgerMenuButton from "../../atoms/BurguerButton/BurguerButton";
 
 interface NavBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
   navigationButtons: NavButton[];
@@ -17,10 +17,25 @@ const NavBar: FunctionComponent<NavBarProps> = ({
 }) => {
   // Define el estado para controlar la visibilidad del menú en dispositivos móviles
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileView, setIsMobileView] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobileView(window.innerWidth < 768); // Establece el tamaño de 768px como límite para dispositivos móviles
+    };
+
+    // Agrega un event listener para detectar cambios en el tamaño de la ventana
+    window.addEventListener('resize', handleResize);
+
+    // Limpia el event listener cuando el componente se desmonta
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []); // Ejecuta el efecto solo una vez al montar el componente
 
   return (
     <nav className="w-full bg-white flex justify-between h-20 items-center">
-      <Logo/>
+      {isMobileView ? <LogoMobil /> : <Logo />}
 
       {/* Renderiza los botones de navegación solo en pantallas grandes */}
       <div className="hidden lg:flex ">
@@ -28,26 +43,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
       </div>
 
       {/* Botón de hamburguesa para abrir/cerrar el menú en dispositivos móviles */}
-      <button
-        className="block lg:hidden px-2 text-gray-600 focus:outline-none"
-        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-      >
-        <svg
-          className="h-6 w-6"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          {isMobileMenuOpen ? (
-            <path d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path d="M4 6h16M4 12h16m-7 6h7" />
-          )}
-        </svg>
-      </button>
+      <HamburgerMenuButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} isOpen={isMobileMenuOpen} />
 
       {/* Renderiza los botones del usuario */}
       <div className="hidden lg:flex">
