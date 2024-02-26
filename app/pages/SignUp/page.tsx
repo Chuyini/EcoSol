@@ -50,7 +50,7 @@ const INPUTS_FORM = [
 ];
 
 const URL = {
-   url: '/LogIn',
+   url: '/pages/LogIn',
    name: 'Ingresa Aquí',
 };
 
