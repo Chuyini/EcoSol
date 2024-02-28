@@ -3,7 +3,6 @@ import { connectionDB } from '../../../lib/db';
 import user from '../../../models/user';
 
 export async function GET() {
-   connectionDB();
    const users = await user.find();
 
    return NextResponse.json({

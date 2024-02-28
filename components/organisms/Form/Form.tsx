@@ -1,44 +1,68 @@
-import { FunctionComponent, HtmlHTMLAttributes } from 'react';
+'use client';
+import { FunctionComponent, HtmlHTMLAttributes, useState } from 'react';
 import Button from '../../atoms/Button/Button';
-import FormInput, { FormInputProps } from '../../molecules/FormInput/FormInput';
-import Link from 'next/link';
-
-interface URL {
-   url: string;
-   name: string;
-}
+import FormInput, { InputValues } from '../../molecules/FormInput/FormInput';
+import FormBottom, {
+   FormBottomProps,
+} from '../../molecules/FormBottom/FormBottom';
 
 interface FormProps extends HtmlHTMLAttributes<HTMLFormElement> {
-   inputs: FormInputProps[];
-   bottomText?: string;
-   bottomUrl?: URL;
+   inputs: InputValues[];
+   bottomMessage?: FormBottomProps;
+   onSubmit: (formData: any) => void;
+   onValidate: (formData: any) => {};
 }
 
 const Form: FunctionComponent<FormProps> = ({
    inputs,
-   bottomText,
-   bottomUrl,
+   bottomMessage,
+   onSubmit,
+   onValidate,
 }) => {
+   const initialFormData = inputs.reduce((acc, curr) => {
+      acc[curr.name] = '';
+      return acc;
+   }, {});
+
+   const [formData, setFormData] = useState(initialFormData);
+   const [errors, setErrors] = useState({});
+
+   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+      setErrors({ ...errors, [e.target.name]: undefined });
+   };
+
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const validationErrors = await onValidate(formData);
+      if (Object.keys(validationErrors).length > 0) {
+         setErrors(validationErrors);
+         return;
+      }
+      await onSubmit(formData);
+   };
+
    return (
       <form
-         action=''
          className='m-auto my-12 flex w-11/12 flex-col bg-white lg:w-1/2'
+         onSubmit={handleSubmit}
       >
          {inputs.map((input) => (
-            <FormInput {...input} key={input.name} />
+            <div key={input.name} className='flex flex-col '>
+               <FormInput
+                  handleChange={handleChange}
+                  values={input}
+                  key={input.name}
+               />
+               {errors[input.name] && (
+                  <span className='pl-2 text-sm text-red-500'>
+                     {errors[input.name]}
+                  </span>
+               )}
+            </div>
          ))}
 
-         {bottomText && bottomUrl && (
-            <div className='my-4 ml-auto mr-2 flex text-lg'>
-               {bottomText}{' '}
-               <Link
-                  className='ml-2 text-sky-500 hover:text-sky-600'
-                  href={bottomUrl?.url}
-               >
-                  {bottomUrl?.name}
-               </Link>
-            </div>
-         )}
+         {bottomMessage && <FormBottom {...bottomMessage} />}
 
          <Button
             className='m-auto mt-8 h-16 w-1/2 text-3xl'

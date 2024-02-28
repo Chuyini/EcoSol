@@ -49,7 +49,7 @@ const userSchema = new Schema(
       },
       postalCode: {
          type: Number,
-         required: [false],
+         required: [true, 'Postal Code is required'],
          trim: true,
          maxlenght: [5, 'Postal Code can not exceed 5 characters'],
       },
