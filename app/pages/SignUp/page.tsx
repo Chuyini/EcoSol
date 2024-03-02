@@ -2,6 +2,7 @@
 import Form from '../../../components/organisms/Form/Form';
 import bcryptjs from 'bcryptjs';
 import { useRouter } from 'next/navigation';
+import user from '../../../models/user';
 
 const INPUTS_FORM = [
    {
@@ -70,10 +71,12 @@ const BOTTOM_MESSAGE = {
 
 const ERROR_MESSAGES = {
    phone: 'El teléfono debe tener 10 dígitos',
+   phoneExists: 'El teléfono ya está registrado',
    password:
       'La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula y un número',
    confirmPassword: 'Las contraseñas no coinciden',
    email: 'El email no es válido',
+   emailExists: 'El email ya está registrado',
    name: 'El nombre no puede estar vacío',
    firstLastName: 'El apellido paterno no puede estar vacío',
    secondLastName: 'El apellido materno no puede estar vacío',
@@ -86,42 +89,15 @@ const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d.,?¿!¡]{8,}$/;
 export default function SignUp() {
    const router = useRouter();
 
-   const validateDatabaseData = async (data: {
-      type: string;
-      content: string;
-   }) => {
-      try {
-         const dataRoute = data.type === 'email' ? 'byEmail' : 'byPhone';
-         const res = await fetch(`/api/user/${dataRoute}/${data.content}`, {
-            method: 'GET',
-            headers: {
-               'Content-Type': 'application/json',
-            },
-         });
-         if (res.status === 200) {
-            if (data.type === 'email')
-               return 'El correo electrónico ya está registrado';
-            else return 'El teléfono ya está registrado';
-         } else return null;
-      } catch (error) {
-         console.error('Error al validar el correo electrónico:', error);
-         throw new Error('Error al validar el correo electrónico');
-      }
-   };
-
-   const validateFormData = async (formData: any) => {
+   const handleValidate = async (formData: any, userExists: any) => {
       const validationErrors = {} as any;
 
-      if (!formData.email || !formData.email.match(EMAIL_REGEX))
+      if (!formData.email && !formData.email.match(EMAIL_REGEX)) {
          validationErrors.email = ERROR_MESSAGES.email;
-      else if (formData.email) {
-         const emailError = await validateDatabaseData({
-            type: 'email',
-            content: formData.email,
-         });
-         if (emailError) validationErrors.email = emailError;
-         else delete validationErrors.email;
-      }
+      } else if (userExists.email) {
+         validationErrors.email = ERROR_MESSAGES.emailExists;
+      } else delete validationErrors.email;
+
       if (!formData.name) {
          validationErrors.name = ERROR_MESSAGES.name;
       } else delete validationErrors.name;
@@ -140,14 +116,10 @@ export default function SignUp() {
 
       if (formData.phone.length !== 10)
          validationErrors.phone = ERROR_MESSAGES.phone;
-      else if (formData.email) {
-         const phoneError = await validateDatabaseData({
-            type: 'phone',
-            content: formData.phone,
-         });
-         if (phoneError) validationErrors.phone = phoneError;
-         else delete validationErrors.phone;
-      }
+      else if (userExists.phone) {
+         validationErrors.phone = ERROR_MESSAGES.phoneExists;
+      } else delete validationErrors.phone;
+
       if (
          !formData.password ||
          formData.password.length < 8 ||
@@ -172,25 +144,27 @@ export default function SignUp() {
 
    const handleSubmit = async (formData) => {
       try {
-         delete formData.confirmPassword;
-         formData.password = await bcryptjs.hash(formData.password, 10);
-
-         const data = Object.assign(formData, {
-            role: 'user',
-            visibility: false,
-            status: 'active',
-         });
-
          const res = await fetch('/api/user', {
             method: 'POST',
-            body: JSON.stringify(data),
+            body: JSON.stringify(formData),
             headers: {
                'Content-Type': 'application/json',
             },
          });
-         const newUser = await res.json();
-         router.push('/');
-         router.refresh();
+         const data = await res.json();
+         const token = data.token;
+         console.log('hola');
+         if (token) {
+            localStorage.setItem('token', token);
+            router.push('/');
+            router.refresh();
+         } else {
+            const validationErrors = await handleValidate(
+               formData,
+               data.userExists
+            );
+            return validationErrors;
+         }
       } catch (error) {
          console.error(error);
       }
@@ -207,7 +181,6 @@ export default function SignUp() {
             inputs={INPUTS_FORM}
             bottomMessage={BOTTOM_MESSAGE}
             onSubmit={handleSubmit}
-            onValidate={validateFormData}
          />
       </main>
    );
