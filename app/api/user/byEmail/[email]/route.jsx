@@ -15,7 +15,7 @@ export async function GET(request, { params }) {
       }
 
       return NextResponse.json({
-         userData,
+         password: userData.password,
       });
    } catch (error) {
       return NextResponse.json({ message: error.message }, { status: 400 });

@@ -9,15 +9,13 @@ import FormBottom, {
 interface FormProps extends HtmlHTMLAttributes<HTMLFormElement> {
    inputs: InputValues[];
    bottomMessage?: FormBottomProps;
-   onSubmit: (formData: any) => void;
-   onValidate: (formData: any) => {};
+   onSubmit: (formData: any) => {};
 }
 
 const Form: FunctionComponent<FormProps> = ({
    inputs,
    bottomMessage,
    onSubmit,
-   onValidate,
 }) => {
    const initialFormData = inputs.reduce((acc, curr) => {
       acc[curr.name] = '';
@@ -32,14 +30,18 @@ const Form: FunctionComponent<FormProps> = ({
       setErrors({ ...errors, [e.target.name]: undefined });
    };
 
-   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const validationErrors = await onValidate(formData);
+   const handleValidate = async (validationErrors: any) => {
       if (Object.keys(validationErrors).length > 0) {
          setErrors(validationErrors);
-         return;
+         return false;
       }
-      await onSubmit(formData);
+      return true;
+   };
+
+   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      const validationErrors = await onSubmit(formData);
+      if (validationErrors && !handleValidate(validationErrors)) return;
    };
 
    return (

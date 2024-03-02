@@ -76,7 +76,7 @@ const FormInput: FunctionComponent<FormInputProps> = ({
                <ButtonPassword
                   isPasswordVisible={showPassword}
                   showPassword={() => setShowPassword(!showPassword)}
-                  className='group flex w-1/12 items-center justify-center rounded-r-lg bg-sky-500  text-white  transition-opacity duration-300 ease-in-out hover:bg-sky-600 '
+                  className='group flex w-16 items-center justify-center rounded-r-lg bg-sky-500  text-white  transition-opacity duration-300 ease-in-out hover:bg-sky-600 '
                />
             )}
          </div>
