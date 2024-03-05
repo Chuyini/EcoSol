@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Form from '../../../components/organisms/Form/Form';
 
@@ -35,6 +36,7 @@ const ERROR_MESSAGES = {
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 export default function Home() {
+   const [loading, setLoading] = useState(false);
    const router = useRouter();
 
    const handleValidate = (data) => {
@@ -53,6 +55,7 @@ export default function Home() {
 
    const handleSubmit = async (formData) => {
       try {
+         setLoading(true);
          const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
@@ -72,6 +75,8 @@ export default function Home() {
          }
       } catch (error) {
          console.error(error);
+      } finally {
+         setLoading(false);
       }
    };
 
@@ -81,6 +86,7 @@ export default function Home() {
             inputs={INPUTS_FORM}
             bottomMessage={BOTTOM_MESSAGE}
             onSubmit={handleSubmit}
+            isLoading={loading}
          />
       </main>
    );

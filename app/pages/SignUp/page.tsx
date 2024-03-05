@@ -1,8 +1,7 @@
 'use client';
 import Form from '../../../components/organisms/Form/Form';
-import bcryptjs from 'bcryptjs';
 import { useRouter } from 'next/navigation';
-import user from '../../../models/user';
+import { useState } from 'react';
 
 const INPUTS_FORM = [
    {
@@ -87,6 +86,7 @@ const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d.,?¿!¡]{8,}$/;
 
 export default function SignUp() {
+   const [loading, setLoading] = useState(false);
    const router = useRouter();
 
    const handleValidate = async (formData: any, userExists: any) => {
@@ -144,6 +144,7 @@ export default function SignUp() {
 
    const handleSubmit = async (formData) => {
       try {
+         setLoading(true);
          const res = await fetch('/api/user', {
             method: 'POST',
             body: JSON.stringify(formData),
@@ -167,6 +168,8 @@ export default function SignUp() {
          }
       } catch (error) {
          console.error(error);
+      } finally {
+         setLoading(false);
       }
    };
 
@@ -181,6 +184,7 @@ export default function SignUp() {
             inputs={INPUTS_FORM}
             bottomMessage={BOTTOM_MESSAGE}
             onSubmit={handleSubmit}
+            isLoading={loading}
          />
       </main>
    );

@@ -5,14 +5,17 @@ import FormInput, { InputValues } from '../../molecules/FormInput/FormInput';
 import FormBottom, {
    FormBottomProps,
 } from '../../molecules/FormBottom/FormBottom';
+import Loading from '../../atoms/Loading/Loading';
 
 interface FormProps extends HtmlHTMLAttributes<HTMLFormElement> {
    inputs: InputValues[];
    bottomMessage?: FormBottomProps;
    onSubmit: (formData: any) => {};
+   isLoading?: boolean;
 }
 
 const Form: FunctionComponent<FormProps> = ({
+   isLoading,
    inputs,
    bottomMessage,
    onSubmit,
@@ -72,7 +75,7 @@ const Form: FunctionComponent<FormProps> = ({
             border='rounded'
             typeof='submit'
          >
-            Enviar
+            {isLoading ? <Loading className='h-8 w-8 border-4 ' /> : 'Enviar'}
          </Button>
       </form>
    );
