@@ -6,7 +6,7 @@ interface ButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
 }
 
 const BUTTON_CLASSES = {
-   primary: 'bg-sky-500 text-white hover:bg-sky-600 ',
+   primary: 'bg-primary-1 text-white hover:bg-sky-600 ',
    secondary: 'bg-gray-300 text-black hover:bg-gray-400',
    danger: 'bg-red-500 text-white',
    rounded: 'rounded-full',

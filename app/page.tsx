@@ -1,21 +1,42 @@
-import Button from "../components/atoms/Button/Button";
-import HeroBanner from "../components/molecules/HeroBanner/HeroBanner";
+import Button from '../components/atoms/Button/Button';
+import Services from '../components/organisms/Services/Services';
 
-const HERO_BANNER_DATA={
-  img:"/image/FondoH.jpg", 
-  imgIglesia:"/image/iglesia.png",
-  title: "Bienvenido a EcoSol un punto de contacto para miembros de la comunidad",
-  description:"En EcoSol estamos comprometidos a brindarte las herramientas suficientes para que puedas establecer contacti con diferentes miembros de la comunidad parroquial  y logres intercambiar productos que sean de tu interes. Logrando que se fomenten las relaciones entre la comunidad."
-}
-
+const SERVICES_CARD_DATA = [
+   {
+      data: {
+         title: 'Venta',
+         body: 'A través de una retribución económica marcada por un precio fijo',
+      },
+      img: '/Card1.png',
+   },
+   {
+      data: {
+         title: 'Intercambio',
+         body: 'A través de un trueque establecido y acordado entre las partes involucradas.',
+      },
+      img: '/Card2.png',
+   },
+   {
+      data: {
+         title: 'Donación',
+         body: 'A través de un intercambio sin costo  entre las partes involucradas.',
+      },
+      img: '/Card3.png',
+   },
+];
 
 export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-       {/* <div className="z-20">jgmgjmfhjmnfgfh</div> Procurar que se vea este div*/}
-      <HeroBanner {...HERO_BANNER_DATA}/>
-      
-      
-    </main>
-  );
+   return (
+      <main className='flex min-h-screen flex-col items-center justify-between py-24'>
+         <Button variant='secondary' border='none' className=''>
+            Hola a todos
+         </Button>
+
+         <Services
+            title='Servicios'
+            body='Dentro de EcoSol podrás encontrar productos ofertados de la siguiente manera'
+            servicesData={SERVICES_CARD_DATA}
+         />
+      </main>
+   );
 }
