@@ -2,10 +2,10 @@ import Button from '../components/atoms/Button/Button';
 import Services from '../components/organisms/Services/Services';
 import Avatar from '../components/atoms/Avatar/Avatar';
 import UsContent from '../components/molecules/UsContent/UsContent';
-import EyeIcon from '../components/atoms/icons/Eye';
+import ChurchIcon from '../components/atoms/icons/Church';
 
 const US_CONTENT = {
-   icon: <EyeIcon className='w-14' />,
+   icon: <ChurchIcon className='w-14' />,
    title: 'Nosotros',
    body: 'EcoSol es una plataforma web que sirve como punto de contacto para los diferentes miembros de la comunidad parroquial de San Luis Potosí que tengan interés en vender, comprar, intercambiar o donar aquellos productos que ya no deseen para darles una segunda vida y con ello fomentar la conciencia ecológica, además de fortalecer las relaciones sociales entre los miembros de cada parroquia.',
    route: { name: 'Registrate ya', url: 'pages/SignUp' },
