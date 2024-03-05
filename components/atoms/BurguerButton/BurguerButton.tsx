@@ -1,15 +1,14 @@
 import { FunctionComponent, HtmlHTMLAttributes } from "react";
 
 interface HamburgerMenuButtonProps extends HtmlHTMLAttributes<HTMLButtonElement> {
-  onClick: () => void;
   isOpen: boolean; // Nuevo prop para indicar si el menú está abierto o cerrado
 }
 
-const HamburgerMenuButton: FunctionComponent<HamburgerMenuButtonProps> = ({ onClick, isOpen }) => {
+const HamburgerMenuButton: FunctionComponent<HamburgerMenuButtonProps> = ({ isOpen, ...rest }) => {
   return (
     <button
       className="block lg:hidden px-2 text-gray-600 focus:outline-none"
-      onClick={onClick}
+      {...rest}
     >
       <svg
         className="h-6 w-6"

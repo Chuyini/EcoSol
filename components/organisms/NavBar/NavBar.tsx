@@ -1,13 +1,13 @@
 "use client";
 import { FunctionComponent, HtmlHTMLAttributes, useState, useEffect } from "react";
 import UserButtons, { Button } from "../../molecules/UserButtons/UserButtons";
-import Navigation, { NavButton } from "../../molecules/Navigation/Navigation";
+import Navigation, { Route } from "../../molecules/Navigation/Navigation";
 import Logo from "../../atoms/Logo/Logo";
-import LogoMobil from "../../atoms/LogoMobil/LogoMobil";
+import LogoMobil from "../../atoms/LogoMobile/LogoMobile";
 import HamburgerMenuButton from "../../atoms/BurguerButton/BurguerButton";
 
 interface NavBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  navigationButtons: NavButton[];
+  navigationButtons: Route[];
   userButtons: Button[];
 }
 
@@ -21,7 +21,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobileView(window.innerWidth < 768); // Establece el tamaño de 768px como límite para dispositivos móviles
+      setIsMobileView(window.innerWidth < 1440); // Establece el tamaño de 1440px como límite para dispositivos móviles
     };
 
     // Agrega un event listener para detectar cambios en el tamaño de la ventana

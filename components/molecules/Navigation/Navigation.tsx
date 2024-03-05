@@ -1,13 +1,13 @@
 import { FunctionComponent, HtmlHTMLAttributes } from "react";
 import Link from "next/link";
 
-export interface NavButton {
+export interface Route {
   name : string;
   url : string;
 }
 
 interface NavigationProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  buttons: NavButton[];
+  buttons: Route[];
 }
 
 const Navigation: FunctionComponent<NavigationProps> = ({
