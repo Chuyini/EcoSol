@@ -75,6 +75,12 @@ const userSchema = new Schema(
          type: Boolean,
          required: [true, 'Visibility is required'],
       },
+      profilePicture: {
+         type: String,
+         required: [false],
+         trim: true,
+         maxlenght: [100, 'Profile Picture can not exceed 100 characters'],
+      },
    },
    {
       timestamps: true,

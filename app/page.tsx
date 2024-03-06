@@ -1,5 +1,6 @@
 import Button from '../components/atoms/Button/Button';
 import Services from '../components/organisms/Services/Services';
+import Avatar from '../components/atoms/Avatar/Avatar';
 
 const SERVICES_CARD_DATA = [
    {
@@ -28,6 +29,8 @@ const SERVICES_CARD_DATA = [
 export default function Home() {
    return (
       <main className='flex min-h-screen flex-col items-center justify-between py-24'>
+         <Avatar userId='123' picture='/Card1.png' className='mr-8' />
+
          <Button variant='secondary' border='none' className=''>
             Hola a todos
          </Button>

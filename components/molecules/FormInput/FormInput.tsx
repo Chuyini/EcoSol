@@ -4,7 +4,9 @@ import {
    HtmlHTMLAttributes,
    useState,
 } from 'react';
-import ButtonPassword from '../../atoms/ButtonPassword/ButtonPassword';
+import EyeIcon from '../../atoms/icons/Eye';
+import EyeSlashIcon from '../../atoms/icons/EyeSlash';
+import DisplayButton from '../../atoms/DisplayButton/DisplayButton';
 
 export interface InputValues {
    label: string;
@@ -13,6 +15,11 @@ export interface InputValues {
    placeholder?: string;
    allows: 'letter' | 'number' | 'string';
 }
+
+const BUTTON_ICONS = {
+   show: <EyeIcon className='h-6 w-6 ' />,
+   hide: <EyeSlashIcon className='h-6 w-6 ' />,
+};
 
 interface FormInputProps extends HtmlHTMLAttributes<HTMLInputElement> {
    values: InputValues;
@@ -73,10 +80,12 @@ const FormInput: FunctionComponent<FormInputProps> = ({
                {...rest}
             />
             {values.type === 'password' && (
-               <ButtonPassword
-                  isPasswordVisible={showPassword}
-                  showPassword={() => setShowPassword(!showPassword)}
-                  className='group flex w-16 items-center justify-center rounded-r-lg bg-sky-500  text-white  transition-opacity duration-300 ease-in-out hover:bg-sky-600 '
+               <DisplayButton
+                  variant='primary'
+                  isShowing={showPassword}
+                  icons={BUTTON_ICONS}
+                  className='w-16 rounded-l-none'
+                  onClick={() => setShowPassword(!showPassword)}
                />
             )}
          </div>

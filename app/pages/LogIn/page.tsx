@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Form from '../../../components/organisms/Form/Form';
+import Cookies from 'js-cookie';
 
 const INPUTS_FORM = [
    {
@@ -35,7 +36,7 @@ const ERROR_MESSAGES = {
 
 const EMAIL_REGEX = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-export default function Home() {
+export default function LogIn() {
    const [loading, setLoading] = useState(false);
    const router = useRouter();
 
@@ -66,7 +67,8 @@ export default function Home() {
          const data = await response.json();
          const token = data.token;
          if (token) {
-            localStorage.setItem('token', token);
+            Cookies.set('token', token);
+
             router.push('/');
             router.refresh();
          } else {

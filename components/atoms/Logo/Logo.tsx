@@ -1,10 +1,16 @@
-import { FunctionComponent, HtmlHTMLAttributes } from "react";
-import Image from "next/image";
+import { FunctionComponent } from 'react';
+import EcoSolIcon from '../icons/EcoSol';
+import Link from 'next/link';
 
-const Logo: FunctionComponent = ({
-  
-}) => {
-  return <Image src={"/logo.png"} alt="logo" width={100} height={100} className="ml-10"/>
+const Logo: FunctionComponent = ({}) => {
+   return (
+      <Link href={'/'} className='mx-8 my-auto flex items-center '>
+         <EcoSolIcon className='h-12 w-12  text-primary-1' />
+         <span className='hidden font-serif text-3xl text-black lg:block'>
+            EcoSol
+         </span>
+      </Link>
+   );
 };
 
 export default Logo;

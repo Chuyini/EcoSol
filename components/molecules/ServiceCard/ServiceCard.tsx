@@ -17,7 +17,6 @@ const ServiceCard: FunctionComponent<ServiceCardProps> = ({
    ishidden,
    ...rest
 }) => {
-   console.log(data.title + ': ' + ishidden);
    const cardClasses =
       ' relative  lg:mb-32 lg:mx-auto lg:scale-100  lg:opacity-100 transition transform duration-500 ease-in-out lg:flex lg:h-96 w-full flex-col items-center lg:w-1/4';
    return (

@@ -10,6 +10,7 @@ const EcoSolIcon: FunctionComponent<ComponentProps<'svg'>> = ({
          className={className}
          strokeWidth='1.5'
          stroke='currentColor'
+         fill='none'
       >
          <path d='M7.896578,5.106262L5.962652,43.543048h33.60197L39.081141,5.106262h-31.184563Z' />
          <path d='M42.223771,5.106262l3.626112,38.436786h-3.626112' />

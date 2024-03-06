@@ -1,66 +1,112 @@
-"use client";
-import { FunctionComponent, HtmlHTMLAttributes, useState, useEffect } from "react";
-import UserButtons, { Button } from "../../molecules/UserButtons/UserButtons";
-import Navigation, { Route } from "../../molecules/Navigation/Navigation";
-import Logo from "../../atoms/Logo/Logo";
-import LogoMobil from "../../atoms/LogoMobile/LogoMobile";
-import HamburgerMenuButton from "../../atoms/BurguerButton/BurguerButton";
+'use client';
+import { FunctionComponent, HtmlHTMLAttributes, useState } from 'react';
+import Navigation, { Route } from '../../molecules/Navigation/Navigation';
+import Logo from '../../atoms/Logo/Logo';
+import UserMenu from '../../molecules/UserMenu/UserMenu';
+import DisplayButton, { Icons } from '../../atoms/DisplayButton/DisplayButton';
+import UserButtons, {
+   UserButton,
+} from '../../molecules/UserButtons/UserButtons';
+import CollapsableMenu, {
+   MenuRoute,
+} from '../../molecules/CollapsableMenu/CollapsableMenu';
 
 interface NavBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  navigationButtons: Route[];
-  userButtons: Button[];
+   navigationButtons: Route[];
+   userButtons: UserButton[];
+   token: string;
+   setToken: (token: string) => void;
+   displayMenuIcons: Icons;
+   displayNotificationsIcons: Icons;
+   notifications: MenuRoute[];
 }
 
 const NavBar: FunctionComponent<NavBarProps> = ({
-  navigationButtons,
-  userButtons,
+   navigationButtons,
+   userButtons,
+   token,
+   setToken,
+   displayMenuIcons,
+   displayNotificationsIcons,
+   notifications,
 }) => {
-  // Define el estado para controlar la visibilidad del menú en dispositivos móviles
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isMobileView, setIsMobileView] = useState(false);
+   const [isNavigationOpen, setIsNavigationOpen] = useState(false);
+   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobileView(window.innerWidth < 1440); // Establece el tamaño de 1440px como límite para dispositivos móviles
-    };
+   const showMenu = () => {
+      setIsMenuOpen(!isMenuOpen);
+      setIsNavigationOpen(false);
+      setIsNotificationsOpen(false);
+   };
 
-    // Agrega un event listener para detectar cambios en el tamaño de la ventana
-    window.addEventListener('resize', handleResize);
+   const showNotifications = () => {
+      setIsMenuOpen(false);
+      setIsNotificationsOpen(!isNotificationsOpen);
+      setIsNavigationOpen(false);
+   };
 
-    // Limpia el event listener cuando el componente se desmonta
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []); // Ejecuta el efecto solo una vez al montar el componente
+   const showNavigation = () => {
+      setIsMenuOpen(false);
+      setIsNavigationOpen(!isNavigationOpen);
+      setIsNotificationsOpen(false);
+   };
 
-  return (
-    <nav className="w-full bg-white flex justify-between h-20 items-center">
-      {isMobileView ? <LogoMobil /> : <Logo />}
+   return (
+      <nav className=' flex h-20 w-full items-center justify-between border bg-white font-serif'>
+         <Logo />
 
-      {/* Renderiza los botones de navegación solo en pantallas grandes */}
-      <div className="hidden lg:flex ">
-        <Navigation buttons={navigationButtons} />
-      </div>
+         <div className='relative flex h-full w-full items-center '>
+            <div
+               className={
+                  (isNavigationOpen ? 'scale-y-100  ' : 'scale-y-0  ') +
+                  ' absolute right-0 top-16 flex w-screen origin-top flex-col border-b-4 border-b-primary-1 bg-white  p-0 transition-transform duration-300 ease-in-out lg:relative lg:top-0 lg:ml-8 lg:mr-auto lg:h-full lg:w-full lg:scale-y-100 lg:flex-row lg:items-center lg:border-0 lg:bg-transparent'
+               }
+            >
+               <Navigation buttons={navigationButtons} />
 
-      {/* Botón de hamburguesa para abrir/cerrar el menú en dispositivos móviles */}
-      <HamburgerMenuButton onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} isOpen={isMobileMenuOpen} />
+               {!token && <UserButtons buttons={userButtons} />}
+               {token && (
+                  <UserMenu
+                     isMenuOpen={isMenuOpen}
+                     token={token}
+                     setToken={setToken}
+                     handleShow={showMenu}
+                  />
+               )}
+            </div>
 
-      {/* Renderiza los botones del usuario */}
-      <div className="hidden lg:flex">
-        <UserButtons buttons={userButtons}/>
-      </div>
+            {token && (
+               <>
+                  <DisplayButton
+                     isShowing={isNotificationsOpen}
+                     variant='transparent'
+                     icons={displayNotificationsIcons}
+                     className='  absolute right-20 lg:right-32'
+                     onClick={showNotifications}
+                  />
+                  <CollapsableMenu
+                     routes={notifications}
+                     className={
+                        (isNotificationsOpen
+                           ? 'scale-y-100  '
+                           : 'scale-y-0  ') +
+                        'absolute right-0 top-20 flex w-2/3 origin-top flex-col justify-start border-2 py-4 transition-transform duration-300 ease-in-out lg:right-4  lg:w-1/3  '
+                     }
+                  />
+               </>
+            )}
 
-      {/* Menú desplegable en dispositivos móviles */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden absolute top-20 w-full h-1/2 bg-white z-10 flex flex-col items-center">
-          <Navigation buttons={navigationButtons} />
-          <div className="space-y-4">
-            <UserButtons buttons={userButtons} className=""/>
-          </div>
-        </div>
-      )}
-    </nav>
-  );
+            <DisplayButton
+               isShowing={isNavigationOpen}
+               variant='transparent'
+               icons={displayMenuIcons}
+               className='ml-auto mr-8 lg:hidden'
+               onClick={showNavigation}
+            />
+         </div>
+      </nav>
+   );
 };
 
 export default NavBar;

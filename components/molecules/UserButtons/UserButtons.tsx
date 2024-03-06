@@ -1,36 +1,40 @@
-import { FunctionComponent, HtmlHTMLAttributes } from "react";
-import Link from "next/link";
+import { FunctionComponent, HtmlHTMLAttributes } from 'react';
+import Link from 'next/link';
 
-export interface Button {
-  name: string;
-  url: string;
-  variant: 'primary' | 'secondary';
+export interface UserButton {
+   name: string;
+   url: string;
+   variant: 'primary' | 'secondary';
 }
 
 interface UserButtonsProps extends HtmlHTMLAttributes<HTMLDivElement> {
-  buttons: Button[];
+   buttons: UserButton[];
 }
 
 const VARIANTS = {
-  primary: "bg-blue-500",
-  secondary: "bg-blue-300",
+   primary: 'bg-primary-1 hover:bg-sky-600 ',
+   secondary: 'bg-primary-2 hover:bg-sky-500',
 };
 
-const UserButtons: FunctionComponent<UserButtonsProps> = ({
-  buttons,
-}) => {
-  return (
-    <div className="flex flex-col lg:w-1/4 lg:flex-row border-black h-36 ">
-      {buttons.map((button) => {
-        const variant = VARIANTS[button.variant] + " ";
-        return (
-          <Link href={button.url} key={button.url} className={`flex m-auto text-white py-4 px-12 rounded-full w-32 items-center lg:mx-3 justify-center ${variant} hover:brightness-90`}>
-            {button.name}
-          </Link>
-        )
-      })}
-    </div>
-  );
+const UserButtons: FunctionComponent<UserButtonsProps> = ({ buttons }) => {
+   const btnClass =
+      'font-serif px-4 m-auto py-2 flex text-center w-28 h-12  lg:m-auto  rounded-full items-center justify-center transition-colors duration-300 ease-in-out text-white ';
+   return (
+      <div className='  my-8 flex h-auto origin-top items-center justify-between lg:my-auto lg:ml-auto lg:mr-8 lg:w-72   '>
+         {buttons.map((button) => {
+            const variant = VARIANTS[button.variant] + ' ';
+            return (
+               <Link
+                  href={button.url}
+                  key={button.url}
+                  className={btnClass + variant}
+               >
+                  {button.name}
+               </Link>
+            );
+         })}
+      </div>
+   );
 };
 
 export default UserButtons;

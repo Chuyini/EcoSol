@@ -1,19 +1,8 @@
-import { Inter } from "next/font/google";
-import "./globals.css";
-import NavBar from "../components/organisms/NavBar/NavBar";
+import { Inter } from 'next/font/google';
+import './globals.css';
+import Layout from '../components/organisms/Layout/Layout';
 
 const inter = Inter({ subsets: ['latin'] });
-
-const NavLinks = [
-  { name: 'Inicio', url: '#' },
-  { name: 'Nosotros', url: '#' },
-  { name: 'Servicios', url: '#' },
-];
-
-const UserLogButtons = [
-  { name: 'Registrate', url: '#', variant: 'secondary' as const},
-  { name: 'Ingresa', url: '#', variant: 'primary' as const},
-]
 
 export const metadata = {
    title: 'Create Next App',
@@ -21,10 +10,11 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return (
-    <html lang="en">
-      <NavBar navigationButtons={NavLinks} userButtons={UserLogButtons}/>
-      <body className={inter.className}>{children}</body>
-    </html>
-  );
+   return (
+      <html lang='en'>
+         <body className={inter.className}>
+            <Layout>{children}</Layout>
+         </body>
+      </html>
+   );
 }

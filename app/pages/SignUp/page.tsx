@@ -2,6 +2,7 @@
 import Form from '../../../components/organisms/Form/Form';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import Cookies from 'js-cookie';
 
 const INPUTS_FORM = [
    {
@@ -156,7 +157,7 @@ export default function SignUp() {
          const token = data.token;
          console.log('hola');
          if (token) {
-            localStorage.setItem('token', token);
+            Cookies.set('token', token);
             router.push('/');
             router.refresh();
          } else {
