@@ -12,6 +12,7 @@ import BarsIcon from '../../atoms/icons/Bars';
 import CloseIcon from '../../atoms/icons/Close';
 import BellFilledIcon from '../../atoms/icons/BellFilled';
 import BellIcon from '../../atoms/icons/Bell';
+import Footer from '../Footer/Footer';
 
 const NavLinks = [
    { name: 'Inicio', url: '/' },
@@ -105,6 +106,10 @@ const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
          {!showChild && (
             <Loading className='m-auto mt-32 flex h-96 w-96 border-8 border-primary-1 text-primary-1' />
          )}
+         <Footer
+            
+            navigationButtons={NavLinks}
+         />
       </>
    );
 };
