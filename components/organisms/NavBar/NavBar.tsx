@@ -10,6 +10,8 @@ import UserButtons, {
 import CollapsableMenu, {
    MenuRoute,
 } from '../../molecules/CollapsableMenu/CollapsableMenu';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
 
 interface NavBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
    navigationButtons: Route[];
@@ -19,6 +21,7 @@ interface NavBarProps extends HtmlHTMLAttributes<HTMLDivElement> {
    displayMenuIcons: Icons;
    displayNotificationsIcons: Icons;
    notifications: MenuRoute[];
+   userData?: any;
 }
 
 const NavBar: FunctionComponent<NavBarProps> = ({
@@ -29,7 +32,10 @@ const NavBar: FunctionComponent<NavBarProps> = ({
    displayMenuIcons,
    displayNotificationsIcons,
    notifications,
+   userData,
 }) => {
+   const router = useRouter();
+
    const [isNavigationOpen, setIsNavigationOpen] = useState(false);
    const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
    const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -52,6 +58,15 @@ const NavBar: FunctionComponent<NavBarProps> = ({
       setIsNotificationsOpen(false);
    };
 
+   const onLogOut = () => {
+      setToken('');
+      showMenu();
+      Cookies.remove('token');
+      router.push('/');
+      router.refresh();
+   };
+   console.log('userData', userData);
+
    return (
       <nav className=' flex h-20 w-full items-center justify-between border bg-white font-serif'>
          <Logo />
@@ -68,10 +83,11 @@ const NavBar: FunctionComponent<NavBarProps> = ({
                {!token && <UserButtons buttons={userButtons} />}
                {token && (
                   <UserMenu
+                     userData={userData}
                      isMenuOpen={isMenuOpen}
                      token={token}
-                     setToken={setToken}
                      handleShow={showMenu}
+                     handleLogOut={onLogOut}
                   />
                )}
             </div>

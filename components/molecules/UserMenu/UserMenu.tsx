@@ -13,8 +13,9 @@ import Cookies from 'js-cookie';
 interface UserMenu {
    token: string;
    isMenuOpen: boolean;
-   setToken: (token: string) => void;
    handleShow: () => void;
+   handleLogOut: () => void;
+   userData?: any;
 }
 
 const BUTTON_ICONS = {
@@ -24,23 +25,12 @@ const BUTTON_ICONS = {
 
 const UserMenu: FunctionComponent<UserMenu> = ({
    token,
-   setToken,
    handleShow,
+   handleLogOut,
    isMenuOpen,
+   userData,
 }) => {
    const router = useRouter();
-
-   const show = () => {
-      handleShow();
-   };
-
-   const logOut = () => {
-      setToken('');
-      handleShow();
-      Cookies.remove('token');
-      router.push('/');
-      router.refresh();
-   };
 
    const btnClass =
       ' text-gray-500 lg:w-full lg:p-4 lg:justify-start flex lg:border-b-2 lg:hover:bg-gray-200';
@@ -48,15 +38,24 @@ const UserMenu: FunctionComponent<UserMenu> = ({
 
    return (
       <div className='m-auto my-4 flex w-10/12 items-center  lg:absolute lg:left-auto lg:right-0 lg:m-0 lg:w-1/4 lg:justify-end '>
-         <Avatar userId={token} picture='/Card1.png' className='mr-4 lg:m-0' />
+         <Avatar
+            userId={token}
+            picture={userData ? userData.profilePicture : ''}
+            className='mr-4 lg:m-0'
+         />
          <DisplayButton
             isShowing={isMenuOpen}
-            onClick={show}
+            onClick={handleShow}
             variant='transparent'
             className='hidden lg:mr-8 lg:flex'
             icons={BUTTON_ICONS}
          />
-         <h1 className='text-black lg:hidden'>Name</h1>
+         <Link
+            className='text-black lg:hidden'
+            href={'/pages/profile/' + token}
+         >
+            {userData.name}
+         </Link>
          <div
             className={
                (isMenuOpen ? ' lg:scale-y-100 ' : ' lg:scale-y-0 ') +
@@ -76,7 +75,7 @@ const UserMenu: FunctionComponent<UserMenu> = ({
                variant='transparent'
                className={btnClass}
                border='none'
-               onClick={logOut}
+               onClick={handleLogOut}
             >
                <RightFromBracketIcon className={iconClass} />
                <span className='my-auto ml-4 hidden lg:flex'>

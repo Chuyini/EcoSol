@@ -12,9 +12,18 @@ export async function GET(request, { params }) {
             { status: 404 }
          );
       }
+      const data = {
+         email: userData.email,
+         name: userData.name,
+         firstLastName: userData.firstLastName,
+         secondLastName: userData.secondLastName,
+         visibility: userData.visibility,
+         phone: userData.phone,
+         profilePicture: userData.profilePicture,
+      };
 
       return NextResponse.json({
-         userData,
+         data,
       });
    } catch (error) {
       return NextResponse.json({ message: error.message }, { status: 400 });

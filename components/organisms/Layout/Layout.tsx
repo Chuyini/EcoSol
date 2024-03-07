@@ -52,14 +52,38 @@ const NOTIFICATIONS = [
 const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
    const [showChild, setShowChild] = useState(false);
    const [token, setToken] = useState('');
+   const [userData, setUserData] = useState({});
    const cookieToken = Cookies.get('token');
+
+   async function fetchData() {
+      try {
+         const response = await fetch(`api/user/${token}`, {
+            method: 'GET',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+         });
+         const data = await response.json();
+         setUserData(data.data);
+      } catch (error) {
+         console.log('error', error);
+      } finally {
+         setShowChild(true);
+      }
+   }
 
    useEffect(() => {
       if (cookieToken) {
          setToken(JSON.parse(atob(cookieToken.split('.')[1])).email);
+      } else {
+         setUserData({});
+         setShowChild(true);
       }
-      setShowChild(true);
    }, [cookieToken]);
+
+   useEffect(() => {
+      if (token) fetchData();
+   }, [token]);
 
    return (
       <>
@@ -73,6 +97,7 @@ const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
                   displayMenuIcons={MENU_BUTTON_ICONS}
                   displayNotificationsIcons={NOTIFICATIONS_BUTTON_ICONS}
                   notifications={NOTIFICATIONS}
+                  userData={userData}
                />
                {children}
             </>
