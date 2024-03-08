@@ -69,7 +69,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
 
    return (
       <nav className=' flex h-20 w-full items-center justify-between border bg-white font-serif'>
-         <Logo />
+         <Logo logoColor='text-primary-1' textColor='text-black'/>
 
          <div className='relative flex h-full w-full items-center '>
             <div
