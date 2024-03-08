@@ -107,7 +107,6 @@ const Layout: FunctionComponent<PropsWithChildren> = ({ children }) => {
             <Loading className='m-auto mt-32 flex h-96 w-96 border-8 border-primary-1 text-primary-1' />
          )}
          <Footer
-            
             navigationButtons={NavLinks}
          />
       </>

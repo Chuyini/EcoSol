@@ -7,8 +7,7 @@ import FooterLogoText from '../../molecules/FooterLogoText/FooterLogoText';
 import NavigationFooter, { RouteFooter } from '../../molecules/NavigationFooter/NavigationFooter';
 
 interface FooterProps extends HtmlHTMLAttributes<HTMLDivElement> {
-    navigationButtons: Route[];
-    color: string;   
+    navigationButtons: Route[]; 
 }
 
 const Footer: FunctionComponent<FooterProps> = ({
