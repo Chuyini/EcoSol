@@ -69,7 +69,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
 
    return (
       <nav className=' flex h-20 w-full items-center justify-between border bg-white font-serif'>
-         <Logo logoColor='text-primary-1' textColor='text-black'/>
+         <Logo variant='primary' className='mx-8' />
 
          <div className='relative flex h-full w-full items-center '>
             <div
@@ -78,7 +78,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
                   ' absolute right-0 top-16 flex w-screen origin-top flex-col border-b-4 border-b-primary-1 bg-white  p-0 transition-transform duration-300 ease-in-out lg:relative lg:top-0 lg:ml-8 lg:mr-auto lg:h-full lg:w-full lg:scale-y-100 lg:flex-row lg:items-center lg:border-0 lg:bg-transparent'
                }
             >
-               <Navigation buttons={navigationButtons} />
+               <Navigation variant='navbar' buttons={navigationButtons} />
 
                {!token && <UserButtons buttons={userButtons} />}
                {token && (
