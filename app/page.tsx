@@ -1,19 +1,17 @@
-
-import HeroBanner from "../components/molecules/HeroBanner/HeroBanner";
+import HeroBanner from '../components/organisms/HeroBanner/HeroBanner';
 import Button from '../components/atoms/Button/Button';
 import Services from '../components/organisms/Services/Services';
 import Avatar from '../components/atoms/Avatar/Avatar';
 import Us from '../components/organisms/Us/Us';
 import ChurchIcon from '../components/atoms/icons/Church';
 
-const HERO_BANNER_DATA={
-  img:"/FondoH.jpeg", 
-  title: "Bienvenido a EcoSol un punto de contacto para miembros de la comunidad",
-  description:"En Ecosol estamos comprometidos a brindarte las herramientas suficientes para que puedas establecer contacto con diferentes miembros de la comunidad parriquial y logres intercambiar productos que sean de tu interés. Logrando que se fomenten las relaciones entre la comunidad ",
-  imgIglesia:"/iglesia.png"
-
-}
-
+const HERO_BANNER_DATA = {
+   img: '/Hero_Banner_Church.png',
+   title: 'Bienvenido a EcoSol un punto de contacto para miembros de la comunidad',
+   description:
+      'En Ecosol estamos comprometidos a brindarte las herramientas suficientes para que puedas establecer contacto con diferentes miembros de la comunidad parriquial y logres intercambiar productos que sean de tu interés. Logrando que se fomenten las relaciones entre la comunidad ',
+   imgIglesia: '/iglesia.png',
+};
 
 const US_CONTENT = {
    icon: <ChurchIcon className='mx-auto w-14 text-primary-1 lg:mx-0' />,
@@ -49,13 +47,8 @@ const SERVICES_CARD_DATA = [
 
 export default function Home() {
    return (
-      <main className='flex min-h-screen flex-col items-center justify-between pt-24'>
-         <Avatar userId='123' picture='/Card1.png' className='mr-8' />
-         <HeroBanner {...HERO_BANNER_DATA}/>
-       {/* <div>jgmgjmfhjmnfgfh</div> Procurar que se vea este div*/}
-         <Button variant='secondary' border='none' className=''>
-            Hola a todos
-         </Button>
+      <main className='flex min-h-screen flex-col items-center justify-between '>
+         <HeroBanner {...HERO_BANNER_DATA} />
          <Us body={US_CONTENT} src='/usImage.png' />
          <Services
             title='Servicios'

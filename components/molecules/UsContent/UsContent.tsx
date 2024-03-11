@@ -37,5 +37,3 @@ const UsContent: FunctionComponent<UsContentProps> = ({
 };
 
 export default UsContent;
-
-/*{imageSrc && <img src={imageSrc} alt='Imagen' className='ml-4' />}*/
