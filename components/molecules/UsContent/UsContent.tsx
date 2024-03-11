@@ -1,11 +1,16 @@
 import Link from 'next/link';
 import { FunctionComponent, ReactNode } from 'react';
-interface UsContentProps {
+
+interface Route {
+   name: string;
+   url: string;
+}
+
+export interface UsContentProps {
    icon: ReactNode;
    title: string;
    body: string;
-   route: { name: string; url: string };
-   imageSrc: string;
+   route: Route;
 }
 
 const UsContent: FunctionComponent<UsContentProps> = ({
@@ -13,26 +18,22 @@ const UsContent: FunctionComponent<UsContentProps> = ({
    title,
    body,
    route,
-   imageSrc,
 }) => {
    return (
-      <div className='flex h-fit w-fit bg-white p-4 font-serif text-black'>
-         <div className='mr-4 flex-shrink-0'>{icon}</div>
-         <div className='w-1/2 flex-grow'>
-            <h1 className='mb-2 text-2xl font-semibold'>{title}</h1>
-            <p className='mb-4'>{body}</p>
-            <Link
-               href={route.url}
-               className='inline-block rounded-full bg-sky-300 p-3 text-white'
-            >
-               {route.name}
-            </Link>
-         </div>
-         <img src='UsImage.png' alt=' ' className='pl-3' />
+      <div className='flex w-full  flex-col bg-white p-4 font-serif text-black lg:w-2/3'>
+         {icon}
+         <h2 className='mx-auto my-4 text-2xl font-semibold lg:mx-0'>
+            {title}
+         </h2>
+         <p className='my-4 text-center lg:text-left'>{body}</p>
+         <Link
+            href={route.url}
+            className='mx-auto my-4 flex w-1/3 items-center justify-center rounded-full bg-secondary-1 px-4 py-2 font-semibold text-white lg:mx-0'
+         >
+            {route.name}
+         </Link>
       </div>
    );
 };
 
 export default UsContent;
-
-/*{imageSrc && <img src={imageSrc} alt='Imagen' className='ml-4' />}*/
