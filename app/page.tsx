@@ -3,7 +3,7 @@ import HeroBanner from "../components/molecules/HeroBanner/HeroBanner";
 import Button from '../components/atoms/Button/Button';
 import Services from '../components/organisms/Services/Services';
 import Avatar from '../components/atoms/Avatar/Avatar';
-import UsContent from '../components/molecules/UsContent/UsContent';
+import Us from '../components/organisms/Us/Us';
 import ChurchIcon from '../components/atoms/icons/Church';
 
 const HERO_BANNER_DATA={
@@ -16,7 +16,7 @@ const HERO_BANNER_DATA={
 
 
 const US_CONTENT = {
-   icon: <ChurchIcon className='w-14' />,
+   icon: <ChurchIcon className='mx-auto w-14 text-primary-1 lg:mx-0' />,
    title: 'Nosotros',
    body: 'EcoSol es una plataforma web que sirve como punto de contacto para los diferentes miembros de la comunidad parroquial de San Luis Potosí que tengan interés en vender, comprar, intercambiar o donar aquellos productos que ya no deseen para darles una segunda vida y con ello fomentar la conciencia ecológica, además de fortalecer las relaciones sociales entre los miembros de cada parroquia.',
    route: { name: 'Registrate ya', url: 'pages/SignUp' },
@@ -56,7 +56,7 @@ export default function Home() {
          <Button variant='secondary' border='none' className=''>
             Hola a todos
          </Button>
-         <UsContent {...US_CONTENT} />
+         <Us body={US_CONTENT} src='/usImage.png' />
          <Services
             title='Servicios'
             body='Dentro de EcoSol podrás encontrar productos ofertados de la siguiente manera'

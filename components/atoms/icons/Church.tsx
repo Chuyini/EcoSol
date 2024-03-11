@@ -9,6 +9,7 @@ const ChurchIcon: FunctionComponent<ComponentProps<'svg'>> = ({
          viewBox='0 0 64 64'
          strokeWidth='1.5'
          stroke='currentColor'
+         fill='none'
          className={className}
       >
          <path
@@ -28,7 +29,7 @@ const ChurchIcon: FunctionComponent<ComponentProps<'svg'>> = ({
             transform='translate(.000001 0.000001)'
          />
          <path d='M9.602918,58.272524l.065512-22.40498' />
-         <path d='' fill='none' stroke='#3f5787' />
+         <path d='' stroke='#3f5787' />
          <path
             d='M54.502219,58.272524l.065503-22.40498'
             transform='translate(.000001 0)'
