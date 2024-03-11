@@ -1,36 +1,34 @@
-import { FunctionComponent, HtmlHTMLAttributes } from 'react';
+import { FunctionComponent, HtmlHTMLAttributes, ReactNode } from 'react';
 import Image from 'next/image';
-import ChurchIcon from '../../atoms/icons/Church';
+import HeroBannerContent from '../../molecules/HeroBannerContent/HeroBannerContent';
 
 interface HeroBannerProps extends HtmlHTMLAttributes<HTMLElement> {
+   icon?: ReactNode;
    img: string;
    title: string;
    description?: string;
 }
 
 const HeroBanner: FunctionComponent<HeroBannerProps> = ({
+   icon,
    img,
    title,
    description,
 }) => {
    return (
-      <div className='relative  w-full bg-center'>
+      <div className='relative flex h-96 w-full justify-center border border-black bg-center'>
          <Image
-            className=' '
+            className=' saturate-25 h-full w-full object-cover brightness-50 contrast-50 hue-rotate-180  '
             src={img}
             alt='HeroBanner '
             width={200}
             height={200}
          />
-         <div className='  absolute top-0 h-full border bg-sky-100 opacity-0'>
-            <ChurchIcon className='h-12 w-12 text-primary-1' />
-            <div className='  pl-2 pr-1 text-center font-serif text-6xl  text-black lg:pr-24 lg:text-left lg:text-7xl'>
-               <h1 className='opacity-100'>{title}</h1>
-            </div>
-            <div className=' bottom-32 right-2 text-center font-serif text-3xl  lg:pr-20 lg:text-left lg:text-2xl'>
-               <h3 className='inline'>{description}</h3>
-            </div>
-         </div>
+         <HeroBannerContent
+            title={title}
+            description={description}
+            icon={icon}
+         />
       </div>
    );
 };

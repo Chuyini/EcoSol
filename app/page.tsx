@@ -6,11 +6,13 @@ import Us from '../components/organisms/Us/Us';
 import ChurchIcon from '../components/atoms/icons/Church';
 
 const HERO_BANNER_DATA = {
-   img: '/Hero_Banner_Church.png',
+   icon: (
+      <ChurchIcon className='mb-4 hidden h-16 w-16 text-primary-1 lg:block' />
+   ),
+   img: '/Hero_Banner_Church.svg',
    title: 'Bienvenido a EcoSol un punto de contacto para miembros de la comunidad',
    description:
       'En Ecosol estamos comprometidos a brindarte las herramientas suficientes para que puedas establecer contacto con diferentes miembros de la comunidad parriquial y logres intercambiar productos que sean de tu interés. Logrando que se fomenten las relaciones entre la comunidad ',
-   imgIglesia: '/iglesia.png',
 };
 
 const US_CONTENT = {
@@ -49,7 +51,7 @@ export default function Home() {
    return (
       <main className='flex min-h-screen flex-col items-center justify-between '>
          <HeroBanner {...HERO_BANNER_DATA} />
-         <Us body={US_CONTENT} src='/usImage.png' />
+         <Us body={US_CONTENT} src='/usImage.svg' />
          <Services
             title='Servicios'
             body='Dentro de EcoSol podrás encontrar productos ofertados de la siguiente manera'
