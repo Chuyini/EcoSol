@@ -21,7 +21,7 @@ const CollapsableMenu: FunctionComponent<CollapsableMenuProps> = ({
       <div
          className={
             className +
-            'absolute  flex flex-col items-center bg-white  text-black'
+            'absolute z-50 flex flex-col items-center bg-white  text-black'
          }
          {...rest}
       >

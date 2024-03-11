@@ -9,7 +9,7 @@ interface UsProps {
 
 const Us: FunctionComponent<UsProps> = ({ body, src }) => {
    return (
-      <div className='mx-auto my-16 flex w-10/12 flex-col lg:flex-row'>
+      <div id='Us' className='mx-auto my-16 flex w-10/12 flex-col lg:flex-row'>
          <UsContent {...body}></UsContent>
          <Image
             src={src}

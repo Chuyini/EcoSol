@@ -16,7 +16,7 @@ const HeroBanner: FunctionComponent<HeroBannerProps> = ({
    description,
 }) => {
    return (
-      <div className='relative flex h-96 w-full justify-center border border-black bg-center'>
+      <div className='relative flex h-96 w-full justify-center  bg-center'>
          <Image
             className=' saturate-25 h-full w-full object-cover brightness-50 contrast-50 hue-rotate-180  '
             src={img}

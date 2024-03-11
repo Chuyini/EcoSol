@@ -31,7 +31,7 @@ const HeroBannerContent: FunctionComponent<HeroBannerContentProps> = ({
             )}
          </h1>
          {description && (
-            <p className=' my-4 hidden text-center font-serif text-xs lg:block  lg:pr-20 lg:text-left lg:text-xl'>
+            <p className=' my-4 hidden text-center font-serif text-xs text-white lg:block  lg:pr-20 lg:text-left lg:text-xl'>
                {description}
             </p>
          )}

@@ -18,8 +18,8 @@ import LocationIcon from '../../atoms/icons/Location';
 
 const NAVIGATION_ROUTES = [
    { name: 'Inicio', url: '/' },
-   { name: 'Nosotros', url: '/pages/Us' },
-   { name: 'Servicios', url: 'pages/Services' },
+   { name: 'Nosotros', url: '/#Us' },
+   { name: 'Servicios', url: '/#Services' },
 ];
 
 const LOG_BUTTONS = [

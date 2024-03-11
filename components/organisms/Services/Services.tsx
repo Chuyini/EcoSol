@@ -19,7 +19,10 @@ const Services: FunctionComponent<ServicesProps> = ({
    const [currentIndex, setCurrentIndex] = useState(0);
 
    return (
-      <div className='bg-secondary-2 flex w-full flex-col items-center p-4 font-serif text-black '>
+      <div
+         id='Services'
+         className='flex w-full flex-col items-center bg-secondary-2 p-4 font-serif text-black '
+      >
          <h1 className='mb-4 mt-12 text-2xl font-semibold'>{title}</h1>
          <p className='mb-12 w-11/12 text-center lg:w-1/4'>{body}</p>
          <div className='m-auto flex w-11/12 flex-col lg:flex-row'>

@@ -9,7 +9,7 @@ const HERO_BANNER_DATA = {
    icon: (
       <ChurchIcon className='mb-4 hidden h-16 w-16 text-primary-1 lg:block' />
    ),
-   img: '/Hero_Banner_Church.svg',
+   img: '/HomePage_HeroBanner.svg',
    title: 'Bienvenido a EcoSol un punto de contacto para miembros de la comunidad',
    description:
       'En Ecosol estamos comprometidos a brindarte las herramientas suficientes para que puedas establecer contacto con diferentes miembros de la comunidad parriquial y logres intercambiar productos que sean de tu interés. Logrando que se fomenten las relaciones entre la comunidad ',
@@ -29,21 +29,21 @@ const SERVICES_CARD_DATA = [
          title: 'Venta',
          body: 'A través de una retribución económica marcada por un precio fijo',
       },
-      img: '/Card1.png',
+      img: '/HomePage_Services_Card1.svg',
    },
    {
       data: {
          title: 'Intercambio',
          body: 'A través de un trueque establecido y acordado entre las partes involucradas.',
       },
-      img: '/Card2.png',
+      img: '/HomePage_Services_Card2.svg',
    },
    {
       data: {
          title: 'Donación',
          body: 'A través de un intercambio sin costo  entre las partes involucradas.',
       },
-      img: '/Card3.png',
+      img: '/HomePage_Services_Card3.svg',
    },
 ];
 
@@ -51,7 +51,7 @@ export default function Home() {
    return (
       <main className='flex min-h-screen flex-col items-center justify-between '>
          <HeroBanner {...HERO_BANNER_DATA} />
-         <Us body={US_CONTENT} src='/usImage.svg' />
+         <Us body={US_CONTENT} src='/HomePage_Us.svg' />
          <Services
             title='Servicios'
             body='Dentro de EcoSol podrás encontrar productos ofertados de la siguiente manera'

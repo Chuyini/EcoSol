@@ -28,7 +28,7 @@ const UsContent: FunctionComponent<UsContentProps> = ({
          <p className='my-4 text-center lg:text-left'>{body}</p>
          <Link
             href={route.url}
-            className='mx-auto my-4 flex w-1/3 items-center justify-center rounded-full bg-secondary-1 px-4 py-2 font-semibold text-white lg:mx-0'
+            className='mx-auto my-4 flex w-1/2 items-center justify-center rounded-full bg-secondary-1 px-4 py-2 font-semibold text-white lg:mx-0 lg:w-1/3'
          >
             {route.name}
          </Link>

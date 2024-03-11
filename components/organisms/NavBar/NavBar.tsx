@@ -75,7 +75,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
             <div
                className={
                   (isNavigationOpen ? 'scale-y-100  ' : 'scale-y-0  ') +
-                  ' absolute right-0 top-16 flex w-screen origin-top flex-col border-b-4 border-b-primary-1 bg-white  p-0 transition-transform duration-300 ease-in-out lg:relative lg:top-0 lg:ml-8 lg:mr-auto lg:h-full lg:w-full lg:scale-y-100 lg:flex-row lg:items-center lg:border-0 lg:bg-transparent'
+                  ' absolute right-0 top-16 z-50 flex w-screen origin-top flex-col border-b-4 border-b-primary-1 bg-white  p-0 transition-transform duration-300 ease-in-out lg:relative lg:top-0 lg:ml-8 lg:mr-auto lg:h-full lg:w-full lg:scale-y-100 lg:flex-row lg:items-center lg:border-0 lg:bg-transparent'
                }
             >
                <Navigation variant='navbar' buttons={navigationButtons} />
@@ -98,7 +98,7 @@ const NavBar: FunctionComponent<NavBarProps> = ({
                      isShowing={isNotificationsOpen}
                      variant='transparent'
                      icons={displayNotificationsIcons}
-                     className='  absolute right-20 lg:right-32'
+                     className='  absolute right-20 z-50 text-primary-1 lg:right-32'
                      onClick={showNotifications}
                   />
                   <CollapsableMenu
