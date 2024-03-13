@@ -12,7 +12,7 @@ interface HeroBannerProps extends HtmlHTMLAttributes<HTMLElement> {
 
 
 const HeroBanner: FunctionComponent<HeroBannerProps> = ({
-  img, title, description, imgIglesia//<-- cumplimos el contrato de la
+  img, title, description, imgIglesia//<-- cumplimos el contrato de la interfaz
 }) => {
   
   return <div className="w-full   z-9 h-20 bg-center"> 
